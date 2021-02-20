@@ -7,9 +7,9 @@ class CategoryDetailsPage extends StatefulWidget {
 }
 
 class _CategoryDetailsPageState extends State<CategoryDetailsPage> {
-
   // TODO: change category name to real one
-  List<Question> questionsList = QuestionDatabase.getQuestionByCategory("some category");
+  List<Question> questionsList =
+      QuestionDatabase.getQuestionByCategory("some category");
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +25,21 @@ class _CategoryDetailsPageState extends State<CategoryDetailsPage> {
     );
   }
 
-  buildList() =>
-      ListView.builder(itemCount: questionsList.length ,itemBuilder: (context, index) {
-        return Text("${questionsList[index].questionContent}");
-      },);
+  buildList() => ListView.builder(
+        itemCount: questionsList.length,
+        itemBuilder: (context, index) {
+          return buildListItem(index);
+        },
+      );
+
+  buildListItem(int index) => Card(
+          child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Text(
+          "${questionsList[index].questionContent}",
+          style: textStyleListItem(),
+        ),
+      ));
 }
+
+TextStyle textStyleListItem() => TextStyle(fontSize: 20);

@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.amberAccent,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: '🥑 Питання авокадо 🥑'),
     );
   }
 }
@@ -57,25 +57,43 @@ class _MyHomePageState extends State<MyHomePage> {
     return FloatingActionButton(
       onPressed: _incrementCounter,
       tooltip: 'Increment',
-      child: Icon(Icons.add),
+      child: Icon(Icons.favorite),
     );
   }
 
-  ListView buildCategoriesList() {
-    return ListView(children: [
-      ListTile(
-        title: Text("Childhood"),
-        onTap: () => goToCategoryPage(),
-      ),
-      ListTile(
-        title: Text("Family and friends"),
-        onTap: () => goToCategoryPage(),
-      ),
-      ListTile(
-        title: Text("Entertainment"),
-        onTap: () => goToCategoryPage(),
-      ),
-    ]);
+  buildCategoriesList() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ListView(children: [
+        Card(
+          child: ListTile(
+            title: Text(
+              "🏀 Детство",
+              style: textStyleListItem(),
+            ),
+            onTap: () => goToCategoryPage(),
+          ),
+        ),
+        Card(
+          child: ListTile(
+            title: Text(
+              "👨‍👩‍👦‍👦 Семья и друзья",
+              style: textStyleListItem(),
+            ),
+            onTap: () => goToCategoryPage(),
+          ),
+        ),
+        Card(
+          child: ListTile(
+            title: Text(
+              "🚴‍♀️Досуг",
+              style: textStyleListItem(),
+            ),
+            onTap: () => goToCategoryPage(),
+          ),
+        ),
+      ]),
+    );
   }
 
   goToCategoryPage() {
@@ -87,5 +105,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-
