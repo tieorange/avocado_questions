@@ -1,3 +1,4 @@
+import 'package:avocado_questions/data/questions.dart';
 import 'package:avocado_questions/data/txt_parser_to_object.dart';
 import 'package:avocado_questions/presentation/category_details/CategoryDetailsPage.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.lightGreen,
             accentColor: Colors.amberAccent,
             visualDensity: VisualDensity.adaptivePlatformDensity,
-            textTheme: GoogleFonts.robotoMonoTextTheme(
+            textTheme: GoogleFonts.comfortaaTextTheme(
               Theme.of(context).textTheme,
             ),
           ),
@@ -50,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: buildAppBar(),
       body: buildCategoriesList(),
-      floatingActionButton: buildFab(),
+      floatingActionButton: buildFab(context),
     );
   }
 
@@ -63,9 +64,23 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  FloatingActionButton buildFab() {
+  FloatingActionButton buildFab(BuildContext context) {
     return FloatingActionButton(
-      onPressed: () {},
+      onPressed: () {
+        final snackBar = SnackBar(
+          content: Text('Yay! A SnackBar!'),
+          action: SnackBarAction(
+            label: 'Undo',
+            onPressed: () {
+              // Some code to undo the change.
+            },
+          ),
+        );
+
+        // Find the Scaffold in the widget tree and use
+        // it to show a SnackBar.
+        Scaffold.of(context).showSnackBar(snackBar);
+      },
       child: Icon(Icons.favorite_border_outlined),
     );
   }
@@ -75,11 +90,8 @@ class _MyHomePageState extends State<MyHomePage> {
     var friends = "👨‍👩‍👦‍👦 Семья и друзья";
     var freeTime = "🚴‍♀ ️Досуг";
 
-    return GridView.count(
-      crossAxisCount: 2,
+    return ListView(
       padding: const EdgeInsets.all(16.0),
-      crossAxisSpacing: 16,
-      mainAxisSpacing: 16,
       children: [
         buildCard(childhood),
         buildCard(friends),
@@ -89,19 +101,22 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   buildCard(String categoryName) {
-    return InkWell(
-      onTap: () => goToCategoryPage(categoryName),
-      child: Card(
-        child: Column(
-          children: [
-            Image.network(
-                "https://images.unsplash.com/photo-1519038983316-43241d5d7b61?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2700&q=80"),
-            Text(
-              categoryName,
-              textAlign: TextAlign.center,
-              style: textStyleListItem(),
-            )
-          ],
+    return Card(
+      // color: ColorConverter.hexStringToColor("#fdfd96"),
+      color: Colors.lightGreen[100],
+      child: InkWell(
+        onTap: () => goToCategoryPage(categoryName),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              Text(
+                categoryName,
+                textAlign: TextAlign.center,
+                style: textStyleListItem(),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -111,8 +126,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Center(
         child: ListTile(
           contentPadding: EdgeInsets.all(16),
-          title: Image.network(
-              "https://images.unsplash.com/photo-1519038983316-43241d5d7b61?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2700&q=80"),
+          title: buildImage(),
           subtitle: Text(
             categoryName,
             textAlign: TextAlign.center,
@@ -122,6 +136,11 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
+  }
+
+  Image buildImage() {
+    return Image.network(
+        "https://images.unsplash.com/photo-1519038983316-43241d5d7b61?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2700&q=80");
   }
 
   goToCategoryPage(String category) {

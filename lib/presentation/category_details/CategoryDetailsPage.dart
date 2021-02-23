@@ -14,9 +14,53 @@ class _CategoryDetailsPageState extends State<CategoryDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // No appbar provided to the Scaffold, only a body with a
+      // CustomScrollView.
+      body: CustomScrollView(
+        slivers: <Widget>[
+          buildSliverAppBar(),
+          FutureBuilder(
+              future: QuestionDatabase.getQuestionByCategoryReal("category"),
+              builder: (BuildContext context,
+                  AsyncSnapshot<List<Question>> snapshot) {
+                // if (!snapshot.hasData) return buildCircularProgressIndicator();
+                return  buildSliverList(snapshot.data);
+              })
+        ],
+      ),
+    );
+
+    return Scaffold(
       appBar: buildAppBar(),
       body: buildQuestionsList(),
       floatingActionButton: buildFavoritesFab(),
+    );
+  }
+
+  SliverAppBar buildSliverAppBar() {
+    return SliverAppBar(
+          // Provide a standard title.
+          title: Text("title"),
+          // Allows the user to reveal the app bar if they begin scrolling
+          // back up the list of items.
+          floating: true,
+          // Display a placeholder widget to visualize the shrinking size.
+          flexibleSpace: Placeholder(),
+          // Make the initial height of the SliverAppBar larger than normal.
+          expandedHeight: 200,
+        );
+  }
+
+  SliverList buildSliverList(List<Question> data) {
+    return SliverList(
+      // Use a delegate to build items as they're scrolled on screen.
+      delegate: SliverChildBuilderDelegate(
+        // The builder function returns a ListTile with a title that
+        // displays the index of the current item.
+        (context, index) => buildListItem(index, data[index]),
+        // Builds 1000 ListTiles
+        childCount: data.length,
+      ),
     );
   }
 
@@ -39,7 +83,8 @@ class _CategoryDetailsPageState extends State<CategoryDetailsPage> {
             }));
   }
 
-  buildCircularProgressIndicator() => Center(child: CircularProgressIndicator());
+  buildCircularProgressIndicator() =>
+      Center(child: CircularProgressIndicator());
 
   AppBar buildAppBar() => AppBar(
       iconTheme: IconThemeData(
