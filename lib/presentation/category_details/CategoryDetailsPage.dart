@@ -72,7 +72,12 @@ class _CategoryDetailsPageState extends State<CategoryDetailsPage> {
   FloatingActionButton buildFavoritesFab() {
     return FloatingActionButton(
       child: Icon(Icons.favorite_border_outlined),
-      onPressed: () {},
+      onPressed: () {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: const Text(
+              'We are working hard on this button. Still not working :( ;( :( ((((('),
+        ));
+      },
     );
   }
 

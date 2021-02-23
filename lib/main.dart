@@ -46,9 +46,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  GlobalKey theKey;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: theKey,
       appBar: buildAppBar(),
       body: buildCategoriesList(),
       floatingActionButton: buildFab(context),
@@ -67,19 +70,10 @@ class _MyHomePageState extends State<MyHomePage> {
   FloatingActionButton buildFab(BuildContext context) {
     return FloatingActionButton(
       onPressed: () {
-        final snackBar = SnackBar(
-          content: Text('Yay! A SnackBar!'),
-          action: SnackBarAction(
-            label: 'Undo',
-            onPressed: () {
-              // Some code to undo the change.
-            },
-          ),
-        );
-
-        // Find the Scaffold in the widget tree and use
-        // it to show a SnackBar.
-        Scaffold.of(context).showSnackBar(snackBar);
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: const Text(
+              'We are working hard on this button. Still not working :( ;( :( ((((('),
+        ));
       },
       child: Icon(Icons.favorite_border_outlined),
     );
@@ -117,22 +111,6 @@ class _MyHomePageState extends State<MyHomePage> {
               )
             ],
           ),
-        ),
-      ),
-    );
-
-    return Card(
-      color: Colors.grey[200],
-      child: Center(
-        child: ListTile(
-          contentPadding: EdgeInsets.all(16),
-          title: buildImage(),
-          subtitle: Text(
-            categoryName,
-            textAlign: TextAlign.center,
-            style: textStyleListItem(),
-          ),
-          onTap: () => goToCategoryPage(categoryName),
         ),
       ),
     );
