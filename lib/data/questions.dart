@@ -21,7 +21,7 @@ class QuestionDatabase {
   }
 
   static Future<List<Question>> getQuestionByCategoryReal(String category) async {
-    List<Question> questionsList = await TxtParser.textToObject();
+    List<Question> questionsList = await TxtParser.textToObject(category);
 
     return questionsList;
   }
