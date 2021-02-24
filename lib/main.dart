@@ -1,9 +1,7 @@
-import 'package:avocado_questions/data/questions.dart';
-import 'package:avocado_questions/data/txt_parser_to_object.dart';
 import 'package:avocado_questions/presentation/category_details/CategoryDetailsPage.dart';
+import 'package:avocado_questions/presentation/tinder_cards/TinderCardsPage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sizer/sizer_util.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,32 +10,23 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(//return LayoutBuilder
-        builder: (context, constraints) {
-      return OrientationBuilder(//return OrientationBuilder
-          builder: (context, orientation) {
-        //initialize SizerUtil()
-        SizerUtil().init(constraints, orientation); //initialize SizerUtil
-
-        return MaterialApp(
-          title: '🥑 Питання Авокадо 🥑',
-          theme: ThemeData(
-            primarySwatch: Colors.lightGreen,
-            accentColor: Colors.amberAccent,
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-            textTheme: GoogleFonts.comfortaaTextTheme(
-              Theme.of(context).textTheme,
-            ),
-          ),
-          home: MyHomePage(title: '🥑 Питання авокадо 🥑'),
-        );
-      });
-    });
+    return MaterialApp(
+      title: '🥑 Питання Авокадо 🥑',
+      theme: ThemeData(
+        primarySwatch: Colors.lightGreen,
+        accentColor: Colors.amberAccent,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        textTheme: GoogleFonts.comfortaaTextTheme(
+          Theme.of(context).textTheme,
+        ),
+      ),
+      home: MyHomePage(title: '🥑 Питання авокадо 🥑'),
+    );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -46,14 +35,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  GlobalKey theKey;
+  // late GlobalKey theKey;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: theKey,
+      // key: theKey,
       appBar: buildAppBar(),
-      body: buildCategoriesList(),
+      // body: buildCategoriesList(),
+      body: TinderCardsPage(),
       floatingActionButton: buildFab(context),
     );
   }
@@ -62,7 +52,8 @@ class _MyHomePageState extends State<MyHomePage> {
     return AppBar(
       title: Text(
         widget.title,
-        style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+        style: GoogleFonts.comfortaa(
+            color: Colors.white, fontWeight: FontWeight.w600),
       ),
     );
   }

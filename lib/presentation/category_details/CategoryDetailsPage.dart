@@ -24,7 +24,7 @@ class _CategoryDetailsPageState extends State<CategoryDetailsPage> {
               builder: (BuildContext context,
                   AsyncSnapshot<List<Question>> snapshot) {
                 if (!snapshot.hasData) return buildSliverList([]);
-                return buildSliverList(snapshot.data);
+                return buildSliverList(snapshot.data!);
               })
         ],
       ),
