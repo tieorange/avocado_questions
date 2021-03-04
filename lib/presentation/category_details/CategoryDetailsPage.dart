@@ -20,6 +20,7 @@ class _CategoryDetailsPageState extends State<CategoryDetailsPage> {
         child: buildList(),
       ),
       floatingActionButton: FloatingActionButton(
+        onPressed: () {  },
         child: Icon(Icons.favorite),
       ),
     );
