@@ -42,8 +42,8 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       // key: theKey,
       appBar: buildAppBar(),
-      body: buildCategoriesList(),
-      // body: TinderCardsPage(),
+      // body: buildCategoriesList(),
+      body: TinderCardsPage(),
       floatingActionButton: buildFab(context),
     );
   }
@@ -52,7 +52,8 @@ class _MyHomePageState extends State<MyHomePage> {
     return AppBar(
       title: Text(
         widget.title,
-        style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+        style: GoogleFonts.comfortaa(
+            color: Colors.white, fontWeight: FontWeight.w600),
       ),
     );
   }
