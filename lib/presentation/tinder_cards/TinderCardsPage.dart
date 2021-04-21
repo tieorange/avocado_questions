@@ -14,7 +14,8 @@ class _TinderCardsPageState extends State<TinderCardsPage> {
       padding: const EdgeInsets.all(25.0),
       child: Text(
         data.questionContent,
-        style: TextStyle(fontSize: 20),
+        style: TextStyle(
+            fontSize: 20, fontWeight: FontWeight.w900),
       ),
     ));
   }
